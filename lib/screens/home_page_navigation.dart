@@ -13,7 +13,7 @@ class HomePageNavigation extends StatefulWidget {
 }
 
 class HomePageNavigationState extends State<HomePageNavigation> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final _pageOptions = <Widget>[];
 
   @override
@@ -23,7 +23,7 @@ class HomePageNavigationState extends State<HomePageNavigation> {
   }
 
   void initialize() {
-    _selectedIndex = widget.selectedIndex;
+    // _selectedIndex = widget.selectedIndex;
     _pageOptions.addAll([const HomePage(), const AddPage(), const Setting()]);
   }
 
