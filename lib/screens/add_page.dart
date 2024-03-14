@@ -59,7 +59,7 @@ class _AddPageState extends State<AddPage> {
   }
 
   @override
-  void initState() {
+  void initState() { 
     getCurrentLocation();
     super.initState();
   }
@@ -75,6 +75,12 @@ class _AddPageState extends State<AddPage> {
           : Stack(
               children: [
                 GoogleMap(
+                  onMapCreated: (controller) {
+                    //method called when map is created
+                    setState(() {
+                      mapController = controller;
+                    });
+                  },
                   initialCameraPosition: CameraPosition(
                     target: LatLng(currentLocation!.latitude!,
                         currentLocation!.longitude!),
@@ -82,6 +88,24 @@ class _AddPageState extends State<AddPage> {
                   ),
                   myLocationEnabled: true,
                   markers: allMarker.values.toSet(),
+                  onLongPress: (taplatlng) async {
+                    geolocator.Position currentPosition =
+                        await geolocator.Geolocator.getCurrentPosition(
+                            desiredAccuracy: geolocator.LocationAccuracy.best);
+
+                    print(allMarker.length);
+                    print(taplatlng.latitude);
+                    print(taplatlng.longitude);
+
+                    allMarker.addAll({
+                      "${allMarker.length}": Marker(
+                        markerId: MarkerId("${allMarker.length}"),
+                        position:
+                            LatLng(taplatlng.latitude, taplatlng.longitude),
+                      )
+                    });
+                    setState(() {});
+                  },
                   // markers: {
                   //   const Marker(
                   //     markerId: MarkerId("destination"),
@@ -89,43 +113,8 @@ class _AddPageState extends State<AddPage> {
                   //   ),
                   // },
                 ),
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Search()),
-                      );
-                    },
-                    child: const Icon(Icons.search),
-                  ),
-                )
               ],
             ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () async {
-          geolocator.Position currentPosition =
-              await geolocator.Geolocator.getCurrentPosition(
-                  desiredAccuracy: geolocator.LocationAccuracy.best);
-
-          print(allMarker.length);
-          print(currentPosition.latitude);
-          print(currentPosition.longitude);
-
-          allMarker.addAll({
-            "${allMarker.length}": Marker(
-              markerId: MarkerId("${allMarker.length}"),
-              position:
-                  LatLng(currentPosition.latitude, currentPosition.longitude),
-            )
-          });
-          setState(() {});
-        },
-      ),
     );
   }
 }

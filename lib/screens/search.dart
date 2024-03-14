@@ -3,7 +3,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:np_parking/controller/map_controller.dart';
+import 'package:np_parking/screens/home.dart';
+import 'package:np_parking/screens/home_page_navigation.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -20,6 +24,7 @@ Please note that you should not hardcode your API key in the production app. Ins
 class _HomeState extends State<Search> {
   String googleApikey = "AIzaSyDfG85bC15NFqShpDnpGA1BscSx7eGnA9o";
   String location = "Search Location";
+  final MapController _mapController = Get.put(MapController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,12 @@ class _HomeState extends State<Search> {
                 if (place != null) {
                   var response =
                       await getPlaceDetails(place.placeId!, googleApikey);
-                  print(response);
+                  print(response.geometry["lat"]);
+
+                  Navigator.pop(context);
+
+                  _mapController.moveCameraToNewPosition(
+                      response.geometry["lat"], response.geometry["lng"]);
 
                   setState(() {
                     location = place.description.toString();
