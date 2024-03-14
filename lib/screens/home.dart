@@ -7,7 +7,7 @@ import 'package:location/location.dart';
 import 'package:np_parking/controller/map_controller.dart';
 import 'package:np_parking/screens/search.dart';
 import 'package:get/get.dart';
-import 'package:np_parking/widgets/circular_indicator.dart';
+import 'package:np_parking/screens/widgets/circular_indicator.dart';
 
 class HomePage extends StatefulWidget {
   bool isSearch;
@@ -20,7 +20,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final MapController _mapController = Get.put(MapController());
   static const LatLng sourceLocation = LatLng(27.678602, 85.405090);
-  static const LatLng destinationLocation = LatLng(27.683157, 85.384274);
+  static const LatLng destinationLocation =
+      LatLng(27.682763573554837, 85.39068784564732);
+  static const LatLng destinationLocation2 =
+      LatLng(27.684208567617446, 85.397270321846);
 
   @override
   void initState() {
@@ -58,6 +61,10 @@ class _HomePageState extends State<HomePage> {
                       const Marker(
                         markerId: MarkerId("destination"),
                         position: destinationLocation,
+                      ),
+                      const Marker(
+                        markerId: MarkerId("destination"),
+                        position: destinationLocation2,
                       ),
                     },
                   ),

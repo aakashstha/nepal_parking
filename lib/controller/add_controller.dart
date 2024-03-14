@@ -11,6 +11,7 @@ class AddController extends GetxController {
   var loading = false.obs;
   LocationData? currentLocation;
   late GoogleMapController googleMapController;
+  var googleMaptype = MapType.normal.obs;
 
   void getCurrentLocation() async {
     loading.value = true;

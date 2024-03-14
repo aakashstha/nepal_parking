@@ -13,7 +13,7 @@ class HomePageNavigation extends StatefulWidget {
 }
 
 class HomePageNavigationState extends State<HomePageNavigation> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final _pageOptions = <Widget>[HomePage(), const AddPage(), const Setting()];
 
   @override
@@ -40,6 +40,7 @@ class HomePageNavigationState extends State<HomePageNavigation> {
                 .textTheme
                 .copyWith(bodySmall: const TextStyle(color: Colors.yellow))),
         child: BottomNavigationBar(
+          elevation: 4,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: AppColors.primaryBlue,
           selectedIconTheme: const IconThemeData(color: AppColors.primaryBlue),
