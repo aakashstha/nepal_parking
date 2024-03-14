@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
             : Stack(
                 children: [
                   GoogleMap(
+                    padding: const EdgeInsets.only(top: 50.0),
                     onMapCreated: (controller) {
                       _mapController.googleMapController = controller;
                     },

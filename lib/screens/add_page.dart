@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart' as geolocator;
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:np_parking/controller/add_controller.dart';
 import 'package:np_parking/screens/search.dart';
+import 'package:np_parking/widgets/circular_indicator.dart';
 
 const LatLng currentLocation1 = LatLng(27.679213, 85.398276);
 
@@ -17,104 +20,81 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  late GoogleMapController mapController;
-  final Completer<GoogleMapController> _controller = Completer();
-  static const LatLng sourceLocation = LatLng(27.678602, 85.405090);
-  static const LatLng destinationLocation = LatLng(27.683157, 85.384274);
+  final AddController _addController = Get.put(AddController());
+  static const LatLng destinationLocation = LatLng(27.678602, 85.405090);
 
   Map<String, Marker> allMarker = {
     "0": const Marker(
       markerId: MarkerId("0"),
-      position: sourceLocation,
+      position: destinationLocation,
     ),
   };
 
-  LocationData? currentLocation;
-
-  void getCurrentLocation() async {
-    Location location = Location();
-
-    location.getLocation().then((location) {
-      currentLocation = location;
-      print(location);
-      setState(() {});
-    });
-
-    GoogleMapController googleMapController = await _controller.future;
-
-    location.onLocationChanged.listen((newLoc) {
-      currentLocation = newLoc;
-      print(newLoc);
-
-      googleMapController
-          .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        zoom: 13.5,
-        target: LatLng(
-          newLoc.latitude!,
-          newLoc.longitude!,
-        ),
-      )));
-      setState(() {});
-    });
-  }
-
   @override
-  void initState() { 
-    getCurrentLocation();
+  void initState() {
+    if (_addController.currentLocation == null) {
+      _addController.getCurrentLocation();
+    }
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Next, Long press anywhere in the map."),
-      ),
-      body: currentLocation == null
-          ? const Center(child: Text("Loading..."))
-          : Stack(
-              children: [
-                GoogleMap(
-                  onMapCreated: (controller) {
-                    //method called when map is created
-                    setState(() {
-                      mapController = controller;
-                    });
-                  },
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(currentLocation!.latitude!,
-                        currentLocation!.longitude!),
-                    zoom: 15,
-                  ),
-                  myLocationEnabled: true,
-                  markers: allMarker.values.toSet(),
-                  onLongPress: (taplatlng) async {
-                    geolocator.Position currentPosition =
-                        await geolocator.Geolocator.getCurrentPosition(
-                            desiredAccuracy: geolocator.LocationAccuracy.best);
+        appBar: AppBar(
+          title: const Text("Next, Long press anywhere in the map."),
+        ),
+        body: Obx(
+          () => _addController.loading.value
+              ? Center(child: circularProgressIndicator())
+              : Stack(
+                  children: [
+                    GoogleMap(
+                      onMapCreated: (controller) {
+                        //method called when map is created
+                        setState(() {
+                          _addController.googleMapController = controller;
+                        });
+                      },
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(
+                            _addController.currentLocation!.latitude!,
+                            _addController.currentLocation!.longitude!),
+                        zoom: 15,
+                      ),
+                      myLocationEnabled: true,
+                      compassEnabled: false,
+                      markers: allMarker.values.toSet(),
 
-                    print(allMarker.length);
-                    print(taplatlng.latitude);
-                    print(taplatlng.longitude);
+                      onLongPress: (taplatlng) async {
+                        geolocator.Position currentPosition =
+                            await geolocator.Geolocator.getCurrentPosition(
+                                desiredAccuracy:
+                                    geolocator.LocationAccuracy.best);
 
-                    allMarker.addAll({
-                      "${allMarker.length}": Marker(
-                        markerId: MarkerId("${allMarker.length}"),
-                        position:
-                            LatLng(taplatlng.latitude, taplatlng.longitude),
-                      )
-                    });
-                    setState(() {});
-                  },
-                  // markers: {
-                  //   const Marker(
-                  //     markerId: MarkerId("destination"),
-                  //     position: destinationLocation,
-                  //   ),
-                  // },
+                        print(allMarker.length);
+                        print(taplatlng.latitude);
+                        print(taplatlng.longitude);
+
+                        allMarker.addAll({
+                          "${allMarker.length}": Marker(
+                            markerId: MarkerId("${allMarker.length}"),
+                            position:
+                                LatLng(taplatlng.latitude, taplatlng.longitude),
+                          )
+                        });
+                        setState(() {});
+                      },
+                      // markers: {
+                      //   const Marker(
+                      //     markerId: MarkerId("destination"),
+                      //     position: destinationLocation,
+                      //   ),
+                      // },
+                    ),
+                  ],
                 ),
-              ],
-            ),
-    );
+        ));
   }
 }

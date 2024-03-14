@@ -1,14 +1,34 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
-class SettingController extends GetxController {
+class AddController extends GetxController {
   var loading = false.obs;
-  var centerLoading = false.obs;
-  var phone = false.obs;
-  var email = false.obs;
-  var dataLoaded = false.obs;
-  var dateAwayScheduleList = {}.obs;
+  LocationData? currentLocation;
+  late GoogleMapController googleMapController;
+
+  void getCurrentLocation() async {
+    loading.value = true;
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    // (LocationPermission.denied) is for ios at first time
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      await Geolocator.requestPermission();
+    }
+
+    Location location = Location();
+
+    location.getLocation().then((location) {
+      currentLocation = location;
+      loading.value = false;
+    });
+  }
 
   // Future<dynamic> getEmailSmsNotification() async {
   //   centerLoading.value = true;
@@ -45,6 +65,4 @@ class SettingController extends GetxController {
   //     }
   //   }
   // }
-
-
 }
