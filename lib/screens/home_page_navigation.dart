@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:np_parking/constants/colors.dart';
-import 'package:np_parking/screens/add_page.dart';
+import 'package:np_parking/screens/add_location.dart';
 import 'package:np_parking/screens/home.dart';
 import 'package:np_parking/screens/setting.dart';
 

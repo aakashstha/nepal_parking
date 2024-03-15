@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:np_parking/screens/home.dart';
 import 'package:np_parking/screens/home_page_navigation.dart';
+import 'package:np_parking/screens/test.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: HomePageNavigation(),
+      // home: Test(),
     );
   }
 }
