@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:np_parking/constants/constants.dart';
 import 'package:np_parking/screens/widgets/add_time.dart';
 
-void locationTypeBottomSheet(BuildContext context) {
+void locationTypeBottomSheet() {
   showModalBottomSheet<void>(
-    context: context,
+    context: navKey.currentContext!,
     builder: (BuildContext context) {
       return SizedBox(
         height: 400,
@@ -45,9 +46,9 @@ void locationTypeBottomSheet(BuildContext context) {
   );
 }
 
-void openingDayTimeBottomSheet(BuildContext context) {
+void openingDayTimeBottomSheet() {
   showModalBottomSheet<void>(
-    context: context,
+    context: navKey.currentContext!,
     builder: (BuildContext context) {
       return SizedBox(
         height: 600,

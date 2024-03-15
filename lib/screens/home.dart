@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:np_parking/controller/map_controller.dart';
+import 'package:np_parking/screens/all_list.dart';
 import 'package:np_parking/screens/search.dart';
 import 'package:get/get.dart';
 import 'package:np_parking/screens/widgets/circular_indicator.dart';
@@ -43,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             : Stack(
                 children: [
                   GoogleMap(
-                    padding: const EdgeInsets.only(top: 50.0),
+                    padding: const EdgeInsets.only(top: 110.0),
                     onMapCreated: (controller) {
                       _mapController.googleMapController = controller;
                     },
@@ -69,9 +72,9 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   Positioned(
-                    top: 50,
-                    right: 60,
-                    child: ElevatedButton(
+                    top: 60,
+                    right: -8,
+                    child: RawMaterialButton(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -79,28 +82,39 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => const Search()),
                         );
                       },
-                      child: const Icon(Icons.search),
+                      elevation: 2.0,
+                      fillColor: Colors.white,
+                      padding: const EdgeInsets.all(12.0),
+                      shape: const CircleBorder(),
+                      child: const Icon(
+                        Icons.search,
+                        size: 25.0,
+                      ),
                     ),
                   ),
-                  Positioned(
-                    top: 110,
-                    right: 60,
-                    child: ElevatedButton(
+                  Align(
+                    alignment: const Alignment(0, -0.84),
+                    child: RawMaterialButton(
                       onPressed: () {
-                        LatLng newlatlang =
-                            LatLng(27.68452149374933, 85.38195859640837);
-
-                        _mapController.googleMapController.animateCamera(
-                          CameraUpdate.newCameraPosition(
-                              CameraPosition(target: newlatlang, zoom: 14)
-                              //17 is new zoom level
-                              ),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AllList(),
+                          ),
                         );
-                        //move position of map camera to new location
                       },
-                      child: const Icon(Icons.add),
+                      elevation: 2.0,
+                      fillColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      ),
+                      child: const Text(
+                        "All list",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
       ),

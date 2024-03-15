@@ -30,7 +30,7 @@ class _HomeState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Place Search Autocomplete Google Map"),
+        title: const Text(" Search Location"),
         backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Stack(

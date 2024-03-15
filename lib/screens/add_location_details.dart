@@ -4,6 +4,7 @@ import 'package:np_parking/screens/widgets/bottomsheet.dart';
 
 void locationDetailsBottomSheet(BuildContext context) {
   showModalBottomSheet<void>(
+    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
     isScrollControlled: true,
     context: context,
     builder: (BuildContext context) {
@@ -190,7 +191,7 @@ void locationDetailsBottomSheet(BuildContext context) {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: TextFormField(
                   onTap: () {
-                    locationTypeBottomSheet(context);
+                    locationTypeBottomSheet();
                   },
                   readOnly: true,
                   keyboardType: TextInputType.number,
@@ -218,7 +219,7 @@ void locationDetailsBottomSheet(BuildContext context) {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: TextFormField(
                   onTap: () {
-                    openingDayTimeBottomSheet(context);
+                    openingDayTimeBottomSheet();
                   },
                   readOnly: true,
                   keyboardType: TextInputType.number,
