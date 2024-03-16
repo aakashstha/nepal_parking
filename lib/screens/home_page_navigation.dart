@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:np_parking/constants/colors.dart';
-import 'package:np_parking/screens/add_location.dart';
-import 'package:np_parking/screens/home.dart';
-import 'package:np_parking/screens/profile.dart';
+import 'package:np_parking/screens/main/add_location.dart';
+import 'package:np_parking/screens/main/home.dart';
+import 'package:np_parking/screens/main/profile.dart';
 
 class HomePageNavigation extends StatefulWidget {
   final int selectedIndex;

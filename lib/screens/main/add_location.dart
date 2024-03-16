@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:np_parking/controller/add_controller.dart';
+import 'package:np_parking/controller/firebase_controller.dart';
 import 'package:np_parking/screens/add_location_details.dart';
 import 'package:np_parking/screens/search.dart';
 import 'package:np_parking/screens/widgets/circular_indicator.dart';
@@ -23,6 +25,7 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   final AddController _addController = Get.put(AddController());
+  final FirebaseController _firebaseController = Get.put(FirebaseController());
   var position = Offset(97.3, 435.3);
   var latlng;
 
@@ -189,15 +192,17 @@ class _AddPageState extends State<AddPage> {
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: TextButton(
                               onPressed: () {
-                                locationDetailsBottomSheet(context);
-                                allMarker.addAll({
-                                  "${allMarker.length}": Marker(
-                                    markerId: MarkerId("${allMarker.length}"),
-                                    position: LatLng(
-                                        latlng.latitude, latlng.longitude),
-                                  )
-                                });
-                                setState(() {});
+                                _firebaseController.addLocation(
+                                    latlng.latitude, latlng.longitude);
+                                // locationDetailsBottomSheet(context);
+                                // allMarker.addAll({
+                                //   "${allMarker.length}": Marker(
+                                //     markerId: MarkerId("${allMarker.length}"),
+                                //     position: LatLng(
+                                //         latlng.latitude, latlng.longitude),
+                                //   )
+                                // });
+                                // setState(() {});
                               },
                               style: ButtonStyle(
                                 backgroundColor:

@@ -6,7 +6,7 @@ import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.
 import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:np_parking/controller/map_controller.dart';
-import 'package:np_parking/screens/home.dart';
+import 'package:np_parking/screens/main/home.dart';
 import 'package:np_parking/screens/home_page_navigation.dart';
 
 class Search extends StatefulWidget {
@@ -31,7 +31,7 @@ class _HomeState extends State<Search> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(" Search Location"),
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: const Color.fromARGB(255, 175, 206, 231),
       ),
       body: Stack(
         children: [

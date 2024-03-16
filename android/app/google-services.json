@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "839347289679",
+    "project_id": "nepalparking-dev",
+    "storage_bucket": "nepalparking-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839347289679:android:0145f55280eeb04018743a",
+        "android_client_info": {
+          "package_name": "com.example.np_parking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASVpM3il6gLXxAo50e38gpCZBY1bfzB9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
