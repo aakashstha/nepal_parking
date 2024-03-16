@@ -25,9 +25,8 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   final AddController _addController = Get.put(AddController());
-  final FirebaseController _firebaseController = Get.put(FirebaseController());
+
   var position = Offset(97.3, 435.3);
-  var latlng;
 
   Map<String, Marker> allMarker = {
     // "0": const Marker(
@@ -62,7 +61,7 @@ class _AddPageState extends State<AddPage> {
                             mapType: _addController.googleMaptype.value,
                             onCameraMove: (position) {
                               print(position);
-                              latlng = position.target;
+                              _addController.latlng = position.target;
                             },
                             onMapCreated: (controller) {
                               //method called when map is created
@@ -191,10 +190,10 @@ class _AddPageState extends State<AddPage> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: TextButton(
-                              onPressed: () {
-                                _firebaseController.addLocation(
-                                    latlng.latitude, latlng.longitude);
-                                // locationDetailsBottomSheet(context);
+                              onPressed: () async {
+                                await _addController.fetchRealAddress();
+
+                                locationDetailsBottomSheet(context);
                                 // allMarker.addAll({
                                 //   "${allMarker.length}": Marker(
                                 //     markerId: MarkerId("${allMarker.length}"),

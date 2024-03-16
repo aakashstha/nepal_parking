@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -47,6 +48,11 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(top: 110.0),
                     onMapCreated: (controller) {
                       _mapController.googleMapController = controller;
+                      // addMarkers(
+                      //   "test",
+                      //   LatLng(_mapController.currentLocation!.latitude!,
+                      //       _mapController.currentLocation!.longitude!),
+                      // );
                     },
                     initialCameraPosition: CameraPosition(
                       target: LatLng(_mapController.currentLocation!.latitude!,
@@ -186,5 +192,25 @@ class _HomePageState extends State<HomePage> {
               ),
       ),
     );
+  }
+
+  addMarkers(String id, LatLng location) async {
+    var url = "https://afzalali15.github.io/images/marvin.png";
+    var bytes = (await NetworkAssetBundle(Uri.parse(url)).load(url))
+        .buffer
+        .asUint8List();
+
+    var marker = Marker(
+      markerId: MarkerId(id),
+      position: location,
+      infoWindow: const InfoWindow(
+        title: "Title of place",
+        snippet: "Description of place",
+      ),
+      // icon: BitmapDescriptor.fromBytes(bytes),
+    );
+
+    _mapController.allMarker.add(marker);
+    setState(() {});
   }
 }

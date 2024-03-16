@@ -147,23 +147,23 @@
 //     );
 //   }
 
-//   // addMarkers(String id, LatLng location) async {
-//   //   var url = "https://afzalali15.github.io/images/marvin.png";
-//   //   var bytes = (await NetworkAssetBundle(Uri.parse(url)).load(url))
-//   //       .buffer
-//   //       .asUint8List();
+//   addMarkers(String id, LatLng location) async {
+//     var url = "https://afzalali15.github.io/images/marvin.png";
+//     var bytes = (await NetworkAssetBundle(Uri.parse(url)).load(url))
+//         .buffer
+//         .asUint8List();
 
-//   //   var marker = Marker(
-//   //     markerId: MarkerId(id),
-//   //     position: location,
-//   //     infoWindow: const InfoWindow(
-//   //       title: "Title of place",
-//   //       snippet: "Description of place",
-//   //     ),
-//   //     icon: BitmapDescriptor.fromBytes(bytes),
-//   //   );
+//     var marker = Marker(
+//       markerId: MarkerId(id),
+//       position: location,
+//       infoWindow: const InfoWindow(
+//         title: "Title of place",
+//         snippet: "Description of place",
+//       ),
+//       icon: BitmapDescriptor.fromBytes(bytes),
+//     );
 
-//   //   _markers[id] = marker;
-//   //   setState(() {});
-//   // }
+//     _markers[id] = marker;
+//     setState(() {});
+//   }
 // }

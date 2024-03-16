@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import 'package:np_parking/constants/colors.dart';
 import 'package:np_parking/constants/constants.dart';
 import 'package:intl/intl.dart';
+import 'package:np_parking/controller/add_controller.dart';
+
+final AddController _addController = Get.put(AddController());
 
 class AddDateTime {
-  TextEditingController openingTimeController = TextEditingController();
-  TextEditingController closingTimeController = TextEditingController();
-
   AddDateTime();
 
   Widget addDateTime() {
@@ -28,8 +28,9 @@ class AddDateTime {
             ),
           ),
           TextFormField(
+            enabled: _addController.isAllDayOpen.value ? false : true,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: openingTimeController,
+            controller: _addController.openingTimeController,
             validator: (val) {
               // return Validator.validateEmpty(val!, "Start Time");
             },
@@ -45,15 +46,14 @@ class AddDateTime {
                 initialTime: TimeOfDay.now(),
               );
 
-              print(pickedTime);
               if (pickedTime != null) {
-                // print(
-                //     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                openingTimeController.text =
+                _addController.openingTimeController.text =
                     pickedTime.format(context); //output 10:51 PM
               } else {
                 log("Time is not selected");
               }
+
+              _addController.addInDayTimeTextField();
             },
           ),
           const Padding(
@@ -67,8 +67,9 @@ class AddDateTime {
             ),
           ),
           TextFormField(
+            enabled: _addController.isAllDayOpen.value ? false : true,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: closingTimeController,
+            controller: _addController.closingTimeController,
             // validator: (val) {
             //   // return Validator.validateEmpty(val!, "End Time");
             // },
@@ -84,15 +85,13 @@ class AddDateTime {
                 initialTime: TimeOfDay.now(),
               );
 
-              print(pickedTime);
               if (pickedTime != null) {
-                // print(
-                //     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                closingTimeController.text =
-                    pickedTime.format(context); //output 10:51 PM
+                _addController.closingTimeController.text =
+                    pickedTime.format(context);
               } else {
                 log("Time is not selected");
               }
+              _addController.addInDayTimeTextField();
             },
           ),
           const SizedBox(height: 30),
