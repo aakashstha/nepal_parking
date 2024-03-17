@@ -40,6 +40,7 @@ class HomePageNavigationState extends State<HomePageNavigation> {
                 .textTheme
                 .copyWith(bodySmall: const TextStyle(color: Colors.yellow))),
         child: BottomNavigationBar(
+          backgroundColor: Color.fromARGB(255, 227, 227, 227),
           elevation: 4,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: AppColors.primaryBlue,

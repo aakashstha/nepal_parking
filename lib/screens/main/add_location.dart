@@ -180,6 +180,13 @@ class _AddPageState extends State<AddPage> {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset.zero,
+                            blurRadius: 6.0,
+                          ),
+                        ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -190,19 +197,14 @@ class _AddPageState extends State<AddPage> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: TextButton(
-                              onPressed: () async {
-                                await _addController.fetchRealAddress();
+                              onPressed: _addController
+                                      .loadingPositionName.value
+                                  ? null
+                                  : () async {
+                                      await _addController.fetchRealAddress();
 
-                                locationDetailsBottomSheet(context);
-                                // allMarker.addAll({
-                                //   "${allMarker.length}": Marker(
-                                //     markerId: MarkerId("${allMarker.length}"),
-                                //     position: LatLng(
-                                //         latlng.latitude, latlng.longitude),
-                                //   )
-                                // });
-                                // setState(() {});
-                              },
+                                      locationDetailsBottomSheet(context);
+                                    },
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -214,12 +216,24 @@ class _AddPageState extends State<AddPage> {
                                   ),
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 6),
-                                child: Text(
-                                  "Add this position",
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _addController.loadingPositionName.value
+                                      ? circularButtonIndicator()
+                                      : const SizedBox(),
+                                  SizedBox(width: 20),
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 6),
+                                    child: Text(
+                                      "Add this position",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

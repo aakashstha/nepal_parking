@@ -21,8 +21,8 @@ class AddDateTime {
             padding: EdgeInsets.only(top: 20),
             child: Text(
               "Opening Time",
-              style: TextStyle(
-                fontSize: 14,
+              style: const TextStyle(
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -39,6 +39,12 @@ class AddDateTime {
               prefix: SizedBox(width: 5),
               suffixIcon: Icon(Icons.access_time),
             ),
+            style: _addController.isAllDayOpen.value
+                ? null
+                : const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
             readOnly: true,
             onTap: () async {
               TimeOfDay? pickedTime = await showTimePicker(
@@ -60,8 +66,8 @@ class AddDateTime {
             padding: EdgeInsets.only(top: 20),
             child: Text(
               "Closing Time",
-              style: TextStyle(
-                fontSize: 14,
+              style: const TextStyle(
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -78,6 +84,12 @@ class AddDateTime {
               prefix: SizedBox(width: 5),
               suffixIcon: Icon(Icons.access_time),
             ),
+            style: _addController.isAllDayOpen.value
+                ? null
+                : const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
             readOnly: true,
             onTap: () async {
               TimeOfDay? pickedTime = await showTimePicker(

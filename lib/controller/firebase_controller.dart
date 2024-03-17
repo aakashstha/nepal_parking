@@ -15,7 +15,7 @@ class FirebaseController extends GetxController {
       FirebaseFirestore.instance.collection('locationDetails').snapshots();
 
   // Add Location Details
-  Future<void> addLocationDetails(double lat, double lng) async {
+  Future<void> addLocationDetails() async {
     String openingTime24Hour = _addController.openingTimeController.text.isEmpty
         ? "00:00"
         : convert12To24(_addController.openingTimeController.text);
@@ -24,7 +24,10 @@ class FirebaseController extends GetxController {
         : convert12To24(_addController.closingTimeController.text);
 
     var a = AddLocationDetailsModel(
-      latlng: GeoPoint(lat, lng),
+      latlng: GeoPoint(
+        _addController.latlng.latitude,
+        _addController.latlng.longitude,
+      ),
       placeName: _addController.placeNameController.text,
       vehicle: _addController.vehicle,
       charge: _addController.charge.value,

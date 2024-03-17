@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:np_parking/constants/constants.dart';
 import 'package:np_parking/constants/enum.dart';
 import 'package:np_parking/controller/add_controller.dart';
 import 'package:np_parking/screens/widgets/add_time.dart';
 
-final AddController _addController = Get.put(AddController()); 
+final AddController _addController = Get.put(AddController());
 void locationTypeBottomSheet() {
   showModalBottomSheet<void>(
+    backgroundColor: Colors.white,
     context: navKey.currentContext!,
     builder: (BuildContext context) {
       return Obx(
@@ -36,29 +38,42 @@ void locationTypeBottomSheet() {
                             _addController.locationTypeController.text =
                                 _addController
                                     .locationType.value.capitalizeFirst!;
+
+                            Get.back();
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: Column(
-                              children: [
-                                Row(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(LocationType
-                                        .values[index].name.capitalizeFirst!),
+                                    Text(
+                                      LocationType
+                                          .values[index].name.capitalizeFirst!,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     LocationType.values[index].name ==
                                             _addController.locationType.value
                                         ? const Icon(
                                             Icons.check,
                                             color: Colors.blue,
                                           )
-                                        : const SizedBox()
+                                        : const SizedBox(height: 24)
                                   ],
                                 ),
-                                Divider()
-                              ],
-                            ),
+                              ),
+                              ConstrainedBox(
+                                constraints: BoxConstraints.tight(
+                                    Size(double.infinity, 1)),
+                                child: Divider(),
+                              )
+                            ],
                           ),
                         ))
               ],
@@ -72,6 +87,7 @@ void locationTypeBottomSheet() {
 
 void openingDayTimeBottomSheet() {
   showModalBottomSheet<void>(
+    backgroundColor: Colors.white,
     context: navKey.currentContext!,
     builder: (BuildContext context) {
       return Obx(
@@ -101,10 +117,12 @@ void openingDayTimeBottomSheet() {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Everyday",
                       style: TextStyle(
-                        fontSize: 16,
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Checkbox(
@@ -153,27 +171,36 @@ void openingDayTimeBottomSheet() {
                       _addController.addInDayTimeTextField();
                       print(_addController.openingDays);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Column(
-                        children: [
-                          Row(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(OpeningDay
-                                  .values[index].name.capitalizeFirst!),
+                              Text(
+                                OpeningDay.values[index].name.capitalizeFirst!,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               _addController.openingDays
                                       .contains(OpeningDay.values[index].name)
                                   ? const Icon(
                                       Icons.check,
                                       color: Colors.blue,
                                     )
-                                  : const SizedBox()
+                                  : const SizedBox(height: 24)
                             ],
                           ),
-                          Divider()
-                        ],
-                      ),
+                        ),
+                        ConstrainedBox(
+                          constraints:
+                              BoxConstraints.tight(Size(double.infinity, 1)),
+                          child: Divider(),
+                        )
+                      ],
                     ),
                   ),
                 ),
@@ -193,8 +220,10 @@ void openingDayTimeBottomSheet() {
                   children: [
                     Text(
                       "Open 7/24",
-                      style: TextStyle(
+                      style: const TextStyle(
+                        color: Colors.black,
                         fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Checkbox(
@@ -205,8 +234,8 @@ void openingDayTimeBottomSheet() {
                         _addController.isAllDayOpen.value = value!;
                         _addController.addInDayTimeTextField();
 
-                        _addController.openingTimeController.text = "--:-- --";
-                        _addController.closingTimeController.text = "--:-- --";
+                        _addController.openingTimeController.text = "";
+                        _addController.closingTimeController.text = "";
                       },
                     ),
                   ],

@@ -12,6 +12,7 @@ import 'package:np_parking/constants/enum.dart';
 
 class AddController extends GetxController {
   var loading = false.obs;
+  var loadingPositionName = false.obs;
   LocationData? currentLocation;
   late GoogleMapController googleMapController;
   var googleMaptype = MapType.normal.obs;
@@ -72,10 +73,12 @@ class AddController extends GetxController {
     };
 
     try {
+      loadingPositionName.value = true;
       var response = await dio.get(endpoint, queryParameters: queryParameters);
-      print(response.data['results'][0]['address_components'][0]["long_name"]);
       placeNameController.text =
           response.data['results'][0]['address_components'][0]["long_name"];
+
+      loadingPositionName.value = false;
     } catch (e) {
       print(e);
     }

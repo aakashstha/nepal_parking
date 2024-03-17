@@ -15,7 +15,7 @@ Map<String, Widget> vehicleNameIcon = {
 
 enum Charge { free, paid }
 
-enum LocationType { public, hospital, restaurant, bar, store }
+enum LocationType { public, hospital, restaurant, store, bar }
 
 enum OpeningDay {
   sunday,
