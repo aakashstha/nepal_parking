@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Align(
-                    alignment: const Alignment(0, -0.84),
+                    alignment: const Alignment(-1, -0.84),
                     child: RawMaterialButton(
                       onPressed: () {
                         print(_mapController.individualLocationDetails.value
@@ -112,10 +112,7 @@ class _HomePageState extends State<HomePage> {
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                       ),
-                      child: const Text(
-                        "All list",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
+                      child: const Icon(Icons.menu_outlined),
                     ),
                   ),
 
