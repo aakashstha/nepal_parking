@@ -41,6 +41,8 @@ Future<void> confirmAlertDialog() async {
                     shape: const BeveledRectangleBorder(),
                   ),
                   onPressed: () async {
+                    _addController.clearAllAddLocationField();
+                    Get.back();
                     Get.back();
                   },
                   child: const Text(
@@ -69,6 +71,7 @@ Future<void> confirmAlertDialog() async {
                     Get.back();
                     await _firebaseController.addLocationDetails();
                     _addController.loading.value = false;
+                    _addController.clearAllAddLocationField();
                   },
                   child: const Text(
                     "Confirm",
