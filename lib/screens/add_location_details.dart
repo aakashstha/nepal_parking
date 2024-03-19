@@ -11,7 +11,7 @@ import 'package:np_parking/screens/widgets/bottomsheet.dart';
 final AddController _addController = Get.put(AddController());
 final FirebaseController _firebaseController = Get.put(FirebaseController());
 
-void locationDetailsBottomSheet(BuildContext context) {
+void locationDetailsBottomSheet(BuildContext context, {bool isUpdate = false}) {
   _addController.locationTypeController.text =
       _addController.locationType.value.capitalizeFirst!;
   showModalBottomSheet<void>(
@@ -350,8 +350,9 @@ void locationDetailsBottomSheet(BuildContext context) {
                       padding: const EdgeInsets.only(top: 40, bottom: 10),
                       child: TextButton(
                         onPressed: () {
+                          print(isUpdate);
                           if (_addController.vehicle.isNotEmpty) {
-                            confirmAlertDialog();
+                            confirmAlertDialog(isUpdate: isUpdate);
                           }
 
                           // _firebaseController.addLocationDetails();
@@ -368,11 +369,11 @@ void locationDetailsBottomSheet(BuildContext context) {
                             ),
                           ),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 6),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
                           child: Text(
-                            "Confirm",
-                            style: TextStyle(
+                            isUpdate ? "Update" : "Confirm",
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w900),

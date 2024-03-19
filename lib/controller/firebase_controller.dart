@@ -83,8 +83,8 @@ class FirebaseController extends GetxController {
 
     var a = AddLocationDetailsModel(
       latlng: GeoPoint(
-        _addController.latlng.latitude,
-        _addController.latlng.longitude,
+        _mapController.individualLocationDetails.value.latlng.latitude,
+        _mapController.individualLocationDetails.value.latlng.longitude,
       ),
       placeName: _addController.placeNameController.text,
       vehicle: _addController.vehicle,

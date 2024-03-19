@@ -97,14 +97,14 @@ void openingDayTimeBottomSheet() {
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: ListView(
               children: <Widget>[
-                Padding(
+                const Padding(
                   padding: const EdgeInsets.only(top: 30, bottom: 20),
                   child: Text(
                     "Opening Day/Time",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Center(
+                const Center(
                   child: Text(
                     "Day",
                     style: TextStyle(
@@ -170,6 +170,8 @@ void openingDayTimeBottomSheet() {
                       // add in DayTime TextField
                       _addController.addInDayTimeTextField();
                       print(_addController.openingDays);
+
+                      _addController.openingDays;
                     },
                     child: Column(
                       children: [
@@ -219,7 +221,7 @@ void openingDayTimeBottomSheet() {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Open 7/24",
+                      "Open 24 hours",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,

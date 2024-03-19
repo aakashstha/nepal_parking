@@ -25,7 +25,7 @@ class AddController extends GetxController {
   TextEditingController locationTypeController = TextEditingController();
   // Opening Day
   var isEverydayChecked = false.obs;
-  List openingDays = [].obs;
+  var openingDays = [].obs;
 
   // Opening/Closing Time
   TextEditingController dayTimeController = TextEditingController();
@@ -39,7 +39,7 @@ class AddController extends GetxController {
         openingDays.map((day) => day.substring(0, 3)).toList().join(", ");
 
     String time = isAllDayOpen.value
-        ? "| 7/24"
+        ? "| 24 hours"
         : "| ${openingTimeController.text} | ${closingTimeController.text}";
 
     dayTimeController.text = "$days  $time";

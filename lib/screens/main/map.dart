@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                       zoom: 15,
                     ),
                     myLocationEnabled: true,
-                    markers: _mapController.allMarker.toSet(),
+                    markers: _mapController.allMarker1.values.toSet(),
                   ),
                   Positioned(
                     top: 60,
@@ -124,7 +124,9 @@ class _HomePageState extends State<HomePage> {
                     right: -5,
                     child: RawMaterialButton(
                       onPressed: () async {
-                        await _mapController.addAllLocationMarkerandDetails();
+                        print(_mapController.allMarker1);
+
+                        // await _mapController.addAllLocationMarkerandDetails();
                       },
                       elevation: 2.0,
                       fillColor: Colors.white,
@@ -434,15 +436,11 @@ class _HomePageState extends State<HomePage> {
                                           onPressed: () async {
                                             print("object");
 
-                                            locationDetailsBottomSheet(context);
+                                            _mapController
+                                                .updateIndividualLocationDetailsField();
 
-                                            // await _firebaseController
-                                            //     .updateLocationDetails(
-                                            //   _mapController
-                                            //       .individualLocationDetails
-                                            //       .value
-                                            //       .id!,
-                                            // );
+                                            locationDetailsBottomSheet(context,
+                                                isUpdate: true);
                                           },
                                           style: ButtonStyle(
                                             backgroundColor:
@@ -456,7 +454,7 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                           ),
-                                          child: Row(
+                                          child: const Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
@@ -464,7 +462,7 @@ class _HomePageState extends State<HomePage> {
                                               //     ? circularButtonIndicator()
                                               //     : const SizedBox(),
                                               SizedBox(width: 20),
-                                              const Padding(
+                                              Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 6),
                                                 child: Text(
@@ -484,15 +482,22 @@ class _HomePageState extends State<HomePage> {
                                       Center(
                                         child: TextButton(
                                           onPressed: () async {
+                                            _mapController.loading.value = true;
+
                                             _mapController
                                                 .showBottomSheet.value = false;
+                                            String id = _mapController
+                                                .individualLocationDetails
+                                                .value
+                                                .id!;
                                             await _firebaseController
-                                                .deleteLocationDetails(
-                                              _mapController
-                                                  .individualLocationDetails
-                                                  .value
-                                                  .id!,
-                                            );
+                                                .deleteLocationDetails(id);
+
+                                            _mapController.allMarker1
+                                                .remove(id);
+
+                                            _mapController.loading.value =
+                                                false;
                                           },
                                           child: const Text(
                                             "This parking is no longer available!",

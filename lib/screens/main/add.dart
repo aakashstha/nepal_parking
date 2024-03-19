@@ -199,6 +199,7 @@ class _AddPageState extends State<AddPage> {
                                       .loadingPositionName.value
                                   ? null
                                   : () async {
+                                      _addController.clearAllAddLocationField();
                                       await _addController.fetchRealAddress();
 
                                       locationDetailsBottomSheet(context);
@@ -220,7 +221,7 @@ class _AddPageState extends State<AddPage> {
                                   _addController.loadingPositionName.value
                                       ? circularButtonIndicator()
                                       : const SizedBox(),
-                                  SizedBox(width: 20),
+                                  const SizedBox(width: 20),
                                   const Padding(
                                     padding: EdgeInsets.symmetric(vertical: 6),
                                     child: Text(
