@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:np_parking/constants/constants.dart';
 import 'package:np_parking/firebase_options.dart';
-import 'package:np_parking/screens/main/home.dart';
+import 'package:np_parking/screens/main/map.dart';
 import 'package:np_parking/screens/home_page_navigation.dart';
 import 'package:np_parking/screens/main/profile.dart';
 import 'package:np_parking/screens/test.dart';
@@ -34,4 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

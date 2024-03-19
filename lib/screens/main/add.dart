@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart' as geolocator;
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -169,7 +167,7 @@ class _AddPageState extends State<AddPage> {
                     ),
                   ),
 
-                  // Add this position Bottom Sheet
+                  // "Add this position" Bottom Sheet
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(

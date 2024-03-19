@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddLocationDetailsModel {
-  final GeoPoint latlng;
-  final String placeName;
-  final List vehicle;
-  final String charge;
-  final String locationType;
-  final List openingDays;
-  final bool isAllDayOpen;
-  final String openingTime;
-  final String closingTime;
+  String? id;
+  GeoPoint latlng;
+  String placeName;
+  List vehicle;
+  String charge;
+  String locationType;
+  List openingDays;
+  bool isAllDayOpen;
+  String openingTime;
+  String closingTime;
 
-  const AddLocationDetailsModel({
+  AddLocationDetailsModel({
+    this.id,
     required this.latlng,
     required this.placeName,
     required this.vehicle,
@@ -25,6 +27,7 @@ class AddLocationDetailsModel {
 
   factory AddLocationDetailsModel.fromJson(Map<String, dynamic> json) {
     return AddLocationDetailsModel(
+      id: json["id"],
       latlng: json["latlng"],
       placeName: json["placeName"],
       vehicle: json["vehicle"],
@@ -40,6 +43,7 @@ class AddLocationDetailsModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
 
+    data["id"] = id;
     data["latlng"] = latlng;
     data["placeName"] = placeName;
     data["vehicle"] = vehicle;

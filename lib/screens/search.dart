@@ -6,7 +6,7 @@ import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.
 import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:np_parking/controller/map_controller.dart';
-import 'package:np_parking/screens/main/home.dart';
+import 'package:np_parking/screens/main/map.dart';
 import 'package:np_parking/screens/home_page_navigation.dart';
 
 class Search extends StatefulWidget {

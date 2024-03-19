@@ -34,7 +34,7 @@ void locationDetailsBottomSheet(BuildContext context) {
                     const Padding(
                       padding: EdgeInsets.only(bottom: 10),
                       child: Text(
-                        "Place Name",
+                        "Street Name",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -156,6 +156,19 @@ void locationDetailsBottomSheet(BuildContext context) {
                         ],
                       ),
                     ),
+
+                    // If Vehicle not selected
+
+                    _addController.vehicle.isEmpty
+                        ? const Center(
+                            child: Text(
+                              "Please select which vehicle can be parked, or select both.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          )
+                        : const SizedBox(),
+
                     const SizedBox(height: 10),
                     Center(
                       child: Wrap(
@@ -337,7 +350,10 @@ void locationDetailsBottomSheet(BuildContext context) {
                       padding: const EdgeInsets.only(top: 40, bottom: 10),
                       child: TextButton(
                         onPressed: () {
-                          confirmAlertDialog();
+                          if (_addController.vehicle.isNotEmpty) {
+                            confirmAlertDialog();
+                          }
+
                           // _firebaseController.addLocationDetails();
 
                           // Get.back();

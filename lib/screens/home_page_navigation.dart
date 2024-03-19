@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:np_parking/constants/colors.dart';
-import 'package:np_parking/screens/main/add_location.dart';
-import 'package:np_parking/screens/main/home.dart';
+import 'package:np_parking/screens/main/add.dart';
+import 'package:np_parking/screens/main/map.dart';
 import 'package:np_parking/screens/main/profile.dart';
 
 class HomePageNavigation extends StatefulWidget {
@@ -57,7 +57,7 @@ class HomePageNavigationState extends State<HomePageNavigation> {
           },
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.zoom_in),
+              icon: Icon(Icons.map),
               label: 'Map',
             ),
             BottomNavigationBarItem(
